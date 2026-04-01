@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olympus Studio Madrid — Fotografía de Quinceañeras</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A96E;
+  --gold-light: #E8D5A3;
+  --gold-dim: #8B6F3E;
+  --black: #080808;
+  --black-card: #111111;
+  --black-border: #1E1E1E;
+  --white: #F5F0E8;
+  --white-dim: #9A9590;
+  --white-muted: #555550;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 4vw;
+  background: rgba(8,8,8,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 0.5px solid var(--black-border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 14px;
+}
+.nav-logo-circle {
+  width: 38px; height: 38px;
+  flex-shrink: 0;
+}
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.nav-brand span {
+  display: flex; font-size: 10px; font-weight: 300;
+  color: var(--gold); letter-spacing: 0.2em;
+}
+.nav-links {
+  display: flex; gap: 2rem; list-style: none;
+}
+.nav-links a {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--white-dim);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--black);
+  background: var(--gold); padding: 9px 22px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-cta:hover { background: var(--gold-light); }
+.nav-brand {
+  display: flex; 
+  align-items: center; 
+  gap: 12px;
+}
+.brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.brand-name span {
+  display: block; 
+  font-size: 9px; font-weight: 300;
+  color: var(--gold); letter-spacing: 0.2em;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 6rem 4vw 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 60%, rgba(201,169,110,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-ornament {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  margin: 0 auto 2.5rem;
+  opacity: 0.6;
+  animation: fadeDown 1.4s ease forwards;
+}
+.hero-eyebrow {
+  font-size: 11px; font-weight: 400; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.2rem;
+  animation: fadeUp 1s ease 0.2s both;
+}
+.hero-logo-wrap {
+  margin-bottom: 2rem;
+  animation: fadeUp 1s ease 0.35s both;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 1rem;
+  animation: fadeUp 1s ease 0.5s both;
+}
+.hero-title em {
+  font-style: italic; color: var(--gold);
+}
+.hero-sub {
+  font-size: 13px; font-weight: 300; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--white-dim);
+  margin-bottom: 3rem;
+  animation: fadeUp 1s ease 0.65s both;
+}
+.hero-divider {
+  width: 40px; height: 0.5px;
+  background: var(--gold);
+  margin: 0 auto 2.5rem;
+  animation: fadeUp 1s ease 0.75s both;
+}
+.hero-desc {
+  font-size: 15px; font-weight: 300; line-height: 1.8;
+  color: var(--white-dim); max-width: 500px;
+  margin: 0 auto 3rem;
+  animation: fadeUp 1s ease 0.85s both;
+}
+.hero-btns {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  animation: fadeUp 1s ease 1s both;
+}
+.btn-primary {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--gold);
+  color: var(--black);
+  font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--gold-light); }
+.btn-ghost {
+  display: inline-block;
+  padding: 13px 35px;
+  border: 0.5px solid var(--gold-dim);
+  color: var(--gold);
+  font-size: 11px; font-weight: 400; letter-spacing: 0.2em;
+  text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); }
+.scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--white-muted); animation: fadeUp 1s ease 1.2s both;
+}
+.scroll-line {
+  width: 0.5px; height: 32px;
+  background: linear-gradient(to bottom, var(--gold-dim), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* ─── SECTION COMMONS ─── */
+section { padding: 7rem 4vw; }
+.section-label {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300; line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+.section-rule {
+  width: 32px; height: 0.5px;
+  background: var(--gold); margin-bottom: 1.5rem;
+}
+.section-desc {
+  font-size: 14px; font-weight: 300;
+  color: var(--white-dim); max-width: 520px; line-height: 1.85;
+}
+
+/* ─── PACKS SECTION ─── */
+#packs { padding-top: 5rem; }
+.packs-controls {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+.control-row {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+}
+.ctrl-btn {
+  padding: 9px 22px;
+  border: 0.5px solid var(--black-border);
+  background: transparent;
+  color: var(--white-dim);
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 400; letter-spacing: 0.18em;
+  text-transform: uppercase; cursor: pointer;
+  transition: all 0.2s;
+}
+.ctrl-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+.ctrl-btn.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,169,110,0.06);
+}
+.ctrl-label {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--white-muted); margin-bottom: 0.6rem;
+}
+.packs-note {
+  padding: 1.2rem 1.5rem;
+  border-left: 1px solid var(--gold-dim);
+  background: rgba(201,169,110,0.03);
+  font-size: 13px; font-weight: 300; color: var(--white-dim);
+  line-height: 1.75;
+  margin-bottom: 3rem;
+}
+.packs-note strong { color: var(--white); font-weight: 400; }
+
+/* ─── CARDS GRID ─── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+}
+.pack-card {
+  background: var(--black-card);
+  border: 0.5px solid var(--black-border);
+  padding: 2rem 1.5rem;
+  position: relative;
+  transition: border-color 0.3s, background 0.3s;
+  display: flex; flex-direction: column;
+}
+.pack-card:hover {
+  border-color: var(--gold-dim);
+  background: rgba(17,17,17,0.95);
+  z-index: 1;
+}
+.pack-card.featured {
+  border-color: var(--gold-dim);
+  background: rgba(201,169,110,0.04);
+}
+.pack-card.featured::before {
+  content: 'Más solicitado';
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--black);
+  font-size: 9px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  white-space: nowrap;
+}
+.card-num {
+  font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--white-muted); margin-bottom: 0.8rem;
+}
+.card-deity {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem; font-weight: 400;
+  color: var(--white); line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.card-tagline {
+  font-size: 11px; font-weight: 300; color: var(--white-muted);
+  margin-bottom: 1.5rem; line-height: 1.4;
+}
+.card-price-wrap {
+  margin-bottom: 1.5rem;
+}
+.card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 300;
+  color: var(--gold); line-height: 1;
+}
+.card-price sup {
+  font-size: 1rem; vertical-align: super;
+  font-family: 'Jost', sans-serif; font-weight: 300;
+}
+.card-price-sub {
+  font-size: 10px; font-weight: 300; letter-spacing: 0.12em;
+  color: var(--white-muted); margin-top: 2px;
+}
+.card-rule {
+  width: 20px; height: 0.5px;
+  background: var(--gold-dim); margin-bottom: 1.2rem;
+}
+.card-features {
+  list-style: none; display: flex; flex-direction: column; gap: 0.55rem;
+  flex: 1;
+}
+.card-features li {
+  font-size: 12px; font-weight: 300; color: var(--white-dim);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+}
+.card-features li::before {
+  content: '';
+  display: block; width: 12px; height: 0.5px;
+  background: var(--gold-dim); flex-shrink: 0; margin-top: 9px;
+}
+.card-features li.highlight { color: var(--white); }
+.card-features li.highlight::before { background: var(--gold); }
+.card-reserve {
+  margin-top: 1.5rem;
+  padding: 10px;
+  border: 0.5px solid var(--black-border);
+  text-align: center;
+  font-size: 10px; font-weight: 300; letter-spacing: 0.12em;
+  color: var(--white-muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.pack-card.featured .card-reserve {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+.pack-card:hover .card-reserve {
+  border-color: var(--gold-dim); color: var(--gold);
+}
+
+/* ─── DIOSES LEGEND ─── */
+.legend-bar {
+  display: flex; flex-wrap: wrap; gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1.2rem 0;
+  border-top: 0.5px solid var(--black-border);
+  border-bottom: 0.5px solid var(--black-border);
+}
+.legend-item {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.legend-deity {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; color: var(--gold);
+}
+.legend-meaning {
+  font-size: 10px; letter-spacing: 0.15em; color: var(--white-muted);
+  text-transform: uppercase;
+}
+
+/* ─── RESERVA SECTION ─── */
+#reserva {
+  background: rgba(201,169,110,0.03);
+  border-top: 0.5px solid var(--black-border);
+  border-bottom: 0.5px solid var(--black-border);
+}
+.reserva-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+  align-items: center;
+}
+.reserva-steps {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  margin-top: 2rem;
+}
+.step {
+  display: flex; gap: 1.5rem; align-items: flex-start;
+}
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 300; color: var(--gold-dim);
+  line-height: 1; flex-shrink: 0; width: 28px;
+}
+.step-body {}
+.step-title {
+  font-size: 13px; font-weight: 400;
+  color: var(--white); letter-spacing: 0.05em;
+  margin-bottom: 3px;
+}
+.step-desc {
+  font-size: 12px; font-weight: 300; color: var(--white-muted);
+  line-height: 1.6;
+}
+.reserva-highlight {
+  background: rgba(201,169,110,0.06);
+  border: 0.5px solid var(--gold-dim);
+  padding: 2rem;
+}
+.rh-label {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.2rem;
+}
+.rh-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4.5rem; font-weight: 300; color: var(--gold);
+  line-height: 1; margin-bottom: 0.5rem;
+}
+.rh-desc {
+  font-size: 13px; font-weight: 300; color: var(--white-dim);
+  line-height: 1.7; margin-bottom: 1.5rem;
+}
+.rh-note {
+  font-size: 11px; font-weight: 300; color: var(--white-muted);
+  border-top: 0.5px solid var(--black-border);
+  padding-top: 1rem; line-height: 1.6;
+}
+
+/* ─── CONTACT ─── */
+#contacto {
+  text-align: center;
+}
+.contact-inner { max-width: 540px; margin: 0 auto; }
+.contact-methods {
+  display: flex; flex-direction: column; gap: 1px;
+  margin-top: 3rem;
+}
+.contact-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem 1.5rem;
+  border: 0.5px solid var(--black-border);
+  transition: border-color 0.2s, background 0.2s;
+}
+.contact-row:hover {
+  border-color: var(--gold-dim); background: rgba(201,169,110,0.03);
+}
+.contact-platform {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--white-muted);
+}
+.contact-handle {
+  font-size: 14px; font-weight: 300; color: var(--white);
+}
+.contact-action {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 2.5rem 4vw;
+  border-top: 0.5px solid var(--black-border);
+  display: flex; flex-wrap: wrap;
+  justify-content: space-between; align-items: center; gap: 1rem;
+}
+.footer-copy {
+  font-size: 11px; font-weight: 300;
+  color: var(--white-muted); letter-spacing: 0.05em;
+}
+.footer-right {
+  font-size: 11px; font-weight: 300;
+  color: var(--white-muted);
+}
+.footer-right span { color: var(--gold); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 0.6; transform: translateY(0); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1100px) {
+  .cards-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 800px) {
+  nav { padding: 1rem 5vw; }
+  .nav-links { display: none; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .reserva-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 520px) {
+  section { padding: 5rem 5vw; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2.8rem; }
+  .legend-bar { gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+   <img src="logo_olympus_banner.png" style="width: 7%; height: auto;">
+  <div class="brand-name">Olympus Studio<span>Madrid</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#packs">Paquetes</a></li>
+    <li><a href="#modalidades">Modalidades</a></li>
+    <li><a href="#reserva">Reservas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Consultar disponibilidad</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Fotografía profesional · Desde 2014</p>
+    <div class="hero-emblem">
+    <img src="logo_olympus.png" style="width: 20%; height: auto;">
+  </div>
+  <div class="hero-logo-wrap">
+    
+  </div>
+  <h1 class="hero-title">
+    El <em>Olimpo</em> de<br>tus quince años
+  </h1>
+  <p class="hero-sub">Quinceañeras & Fiestas de 15</p>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">
+    Capturamos el día más especial de tu vida con la precisión y el arte que merece. Entrega digital en alta resolución.
+  </p>
+  <div class="hero-btns">
+    <a href="#packs" class="btn-primary">Ver paquetes</a>
+    <a href="#contacto" class="btn-ghost">Contactar ahora</a>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Descubrir</span>
+  </div>
+</section>
+
+<!-- PACKS -->
+<section id="packs">
+  <p class="section-label">Colección 2026</p>
+  <h2 class="section-title">Los <em>Dioses</em> del Olimpo</h2>
+  <div class="section-rule"></div>
+  <p class="section-desc">
+    Cinco paquetes inspirados en las divinidades del Olimpo griego. Cada uno, una experiencia distinta diseñada para inmortalizar tu celebración.
+  </p>
+
+  <div class="legend-bar" style="margin-top:2.5rem">
+    <div class="legend-item">
+      <span class="legend-deity">I — Helios</span>
+      <span class="legend-meaning">Dios del sol · Primera luz</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-deity">II — Iris</span>
+      <span class="legend-meaning">Diosa del arcoíris · Mensajera</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-deity">III — Artemis</span>
+      <span class="legend-meaning">Diosa de la luna · Favorita</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-deity">IV — Athena</span>
+      <span class="legend-meaning">Diosa de la sabiduría · Completo</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-deity">V — Zeus</span>
+      <span class="legend-meaning">Rey del Olimpo · Máxima experiencia</span>
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="packs-controls">
+    <div>
+      <p class="ctrl-label">Tipo de sesión</p>
+      <div class="control-row">
+        <button class="ctrl-btn active" id="btn-ext" onclick="setSession('ext')">Sesión en exteriores</button>
+        <button class="ctrl-btn" id="btn-fest" onclick="setSession('fest')">Fiesta de 15 años</button>
+      </div>
+    </div>
+    <div>
+      <p class="ctrl-label">Modalidad</p>
+      <div class="control-row">
+        <button class="ctrl-btn active" id="btn-photos" onclick="setModal('photos')">Por fotos seleccionadas</button>
+        <button class="ctrl-btn" id="btn-time" onclick="setModal('time')">Por tiempo de sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="packs-note" id="packs-note"></div>
+
+  <div class="cards-grid" id="cards-container"></div>
+
+  <div style="margin-top:2rem; padding:1.2rem 1.5rem; border:0.5px solid var(--black-border); display:flex; flex-wrap:wrap; gap:2rem;">
+    <div>
+      <p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:3px">Entrega</p>
+      <p style="font-size:13px;font-weight:300;color:var(--white-dim)">Google Drive · Galería privada</p>
+    </div>
+    <div>
+      <p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:3px">Formato</p>
+      <p style="font-size:13px;font-weight:300;color:var(--white-dim)">JPG alta resolución · Sin marca de agua</p>
+    </div>
+    <div>
+      <p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:3px">Precio</p>
+      <p style="font-size:13px;font-weight:300;color:var(--white-dim)">IVA no incluido · Sin gastos extra ocultos</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVA -->
+<section id="reserva">
+  <div class="reserva-inner">
+    <div>
+      <p class="section-label">Proceso de reserva</p>
+      <h2 class="section-title">Tu fecha,<br><em>asegurada</em></h2>
+      <div class="section-rule"></div>
+      <p class="section-desc">Simple, transparente y sin sorpresas. Así trabajamos en Olympus Studio.</p>
+      <div class="reserva-steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <p class="step-title">Consulta de disponibilidad</p>
+            <p class="step-desc">Escríbenos por Instagram o WhatsApp con la fecha que deseas y el paquete de tu interés.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <p class="step-title">Confirmación y señal del 30%</p>
+            <p class="step-desc">Una vez acordados los detalles, se abona el 30% del total para garantizar la reserva de tu fecha.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <p class="step-title">Sesión y entrega</p>
+            <p class="step-desc">El resto se abona el día de la sesión o evento. Entrega digital según los plazos de cada paquete.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reserva-highlight">
+      <p class="rh-label">Garantía de reserva</p>
+      <div class="rh-amount">30%</div>
+      <p class="rh-desc">
+        Para confirmar tu fecha en nuestro calendario se requiere un anticipo del <strong style="color:var(--white);font-weight:400">30% del valor total</strong> del paquete seleccionado. Este importe queda deducido del precio final.
+      </p>
+      <p class="rh-note">
+        El 70% restante se abona el día de la sesión o del evento, antes del inicio de la cobertura fotográfica. La señal no es reembolsable en caso de cancelación con menos de 15 días de antelación.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-inner">
+    <p class="section-label">¿Listo para reservar?</p>
+    <h2 class="section-title">Hablemos de<br><em>tu celebración</em></h2>
+    <div class="section-rule" style="margin:0 auto 1.5rem"></div>
+    <p class="section-desc" style="margin:0 auto">
+      Cuéntanos tu fecha, la locación que tienes en mente y el paquete que más te gusta. Te respondemos en menos de 24 horas.
+    </p>
+    <div class="contact-methods">
+      <div class="contact-row">
+        <span class="contact-platform">Instagram</span>
+        <span class="contact-handle">@olympus_studio.madrid</span>
+        <span class="contact-action">Escribir</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-platform">WhatsApp</span>
+        <span class="contact-handle"> (+34) 675055144</span>
+        <span class="contact-action">Escribir</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-platform">Fotografía</span>
+        <span class="contact-handle">Bodas · 15 años · Moda · Eventos</span>
+        <span class="contact-action">+10 años de experiencia</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-platform">Ciudad</span>
+        <span class="contact-handle">Madrid y alrededores</span>
+        <span class="contact-action">España</span>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem">
+      <a href="https://www.instagram.com/olympus_studio.madrid" target="_blank" class="btn-primary">Reservar en Instagram</a>
+    </div>
+    <div style="margin-top:2.5rem">
+      <a href="https://wa.me/34675055144" target="_blank" class="btn-primary"> Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy" style="text-align: center;">© 2026 Olympus Studio Madrid. Todos los derechos reservados.</p>
+  <p class="footer-right">Fotografía digital · <span>Sin gastos ocultos</span></p>
+</footer>
+
+<script>
+const data = {
+  ext: {
+    photos: {
+      note: "<strong>Modalidad por fotos seleccionadas:</strong> Se realiza la sesión completa, se seleccionan las mejores tomas y se entregan editadas en alta resolución. Las fotos no seleccionadas no se entregan. <strong>Ideal para</strong> familias que quieren un resultado cuidado y controlado.",
+      packages: [
+        { num:"I", deity:"Helios", tagline:"Primera luz · Sesión express", price:89, features:["1 hora de sesión","10 fotos editadas en alta res.","1 locación en Madrid","Envío por enlace digital"] },
+        { num:"II", deity:"Iris", tagline:"Mensajera · La opción equilibrada", price:139, features:["1h 30 min de sesión","20 fotos editadas en alta res.","Hasta 2 locaciones","Envío por enlace digital"] },
+        { num:"III", deity:"Artemis", tagline:"Diosa de la luna · La favorita", price:199, featured:true, features:["2 horas de sesión","35 fotos editadas en alta res.","Hasta 3 locaciones","Envío por enlace digital"] },
+        { num:"IV", deity:"Athena", tagline:"Sabiduría · Book completo", price:269, features:["2h 30 min de sesión","50 fotos editadas en alta res.","Locaciones sin límite","Galería privada online"] },
+        { num:"V", deity:"Zeus", tagline:"Rey del Olimpo · Máxima experiencia", price:349, features:["3 horas de sesión","70 fotos editadas en alta res.","Todas las tomas sin editar incluidas","Locaciones sin límite","Galería privada + descarga directa"] },
+      ]
+    },
+    time: {
+      note: "<strong>Modalidad por tiempo:</strong> Se paga por el tiempo de sesión. Se entregan <em>todas</em> las fotos tomadas sin edición más un número de fotos con edición profesional incluida. <strong>Ideal para</strong> clientas que quieren libertad total sobre sus archivos.",
+      packages: [
+        { num:"I", deity:"Helios", tagline:"Primera luz · Sesión express", price:75, features:["1 hora de sesión","Todas las fotos sin editar","5 fotos con edición incluida","1 locación en Madrid"] },
+        { num:"II", deity:"Iris", tagline:"Relajada y natural", price:115, features:["1h 30 min de sesión","Todas las fotos sin editar","12 fotos con edición incluida","Hasta 2 locaciones"] },
+        { num:"III", deity:"Artemis", tagline:"La favorita por tiempo", price:165, featured:true, features:["2 horas de sesión","Todas las fotos sin editar","25 fotos con edición incluida","Hasta 3 locaciones"] },
+        { num:"IV", deity:"Athena", tagline:"Tarde entera · Book completo", price:225, features:["3 horas de sesión","Todas las fotos sin editar","40 fotos con edición incluida","Locaciones sin límite","Galería privada online"] },
+        { num:"V", deity:"Zeus", tagline:"Sesión premium extendida", price:299, features:["4 horas de sesión","Todas las fotos sin editar","60 fotos con edición incluida","Locaciones sin límite","Galería privada + descarga directa"] },
+      ]
+    }
+  },
+  fest: {
+    photos: {
+      note: "<strong>Modalidad por fotos seleccionadas:</strong> El fotógrafo cubre el evento completo y se entregan las mejores fotos editadas según el paquete. <strong>Ideal para</strong> familias que quieren un reportaje pulido sin recibir cientos de archivos. Entrega en 7-10 días hábiles.",
+      packages: [
+        { num:"I", deity:"Helios", tagline:"Cobertura esencial del evento", price:149, features:["2 horas de cobertura","25 fotos editadas en alta res.","Brindis · Torta · Baile","Envío por enlace digital"] },
+        { num:"II", deity:"Iris", tagline:"Fiesta bien documentada", price:229, features:["3 horas de cobertura","50 fotos editadas en alta res.","Entrada + celebración + baile grupal","Envío por enlace digital"] },
+        { num:"III", deity:"Artemis", tagline:"La más solicitada en fiestas", price:329, featured:true, features:["4 horas de cobertura","80 fotos editadas en alta res.","Cobertura completa de la fiesta","Galería privada online"] },
+        { num:"IV", deity:"Athena", tagline:"Recuerdo sin lagunas", price:429, features:["5 horas de cobertura","120 fotos editadas en alta res.","Todos los momentos del evento","Galería privada + descarga"] },
+        { num:"V", deity:"Zeus", tagline:"Cobertura total del gran día", price:549, features:["6 horas o más de cobertura","180 fotos editadas en alta res.","Todas las tomas sin editar incluidas","Preparativos + fiesta completa","Galería privada + descarga directa"] },
+      ]
+    },
+    time: {
+      note: "<strong>Modalidad por tiempo:</strong> Se paga por tiempo de cobertura. Se entregan <em>todas</em> las fotos del evento sin edición más fotos editadas incluidas. <strong>Ideal para</strong> familias que valoran el archivo completo del evento.",
+      packages: [
+        { num:"I", deity:"Helios", tagline:"Lo esencial de la noche", price:129, features:["2 horas de cobertura","Todas las fotos sin editar","15 fotos con edición incluida","Momentos clave garantizados"] },
+        { num:"II", deity:"Iris", tagline:"Fiesta bien cubierta", price:199, features:["3 horas de cobertura","Todas las fotos sin editar","30 fotos con edición incluida","Entrada + baile principal"] },
+        { num:"III", deity:"Artemis", tagline:"El preferido por familias", price:289, featured:true, features:["4 horas de cobertura","Todas las fotos sin editar","50 fotos con edición incluida","Cobertura completa de la fiesta","Galería privada online"] },
+        { num:"IV", deity:"Athena", tagline:"Sin perderse nada del evento", price:379, features:["5 horas de cobertura","Todas las fotos sin editar","75 fotos con edición incluida","Toda la fiesta cubierta","Galería privada + descarga"] },
+        { num:"V", deity:"Zeus", tagline:"Día completo del gran evento", price:479, features:["6 horas de cobertura","Todas las fotos sin editar","100 fotos con edición incluida","Preparativos + fiesta completa","Galería privada + descarga directa"] },
+      ]
+    }
+  }
+};
+
+let session = 'ext', modal = 'photos';
+
+function setSession(s) {
+  session = s;
+  document.getElementById('btn-ext').className = 'ctrl-btn' + (s === 'ext' ? ' active' : '');
+  document.getElementById('btn-fest').className = 'ctrl-btn' + (s === 'fest' ? ' active' : '');
+  render();
+}
+function setModal(m) {
+  modal = m;
+  document.getElementById('btn-photos').className = 'ctrl-btn' + (m === 'photos' ? ' active' : '');
+  document.getElementById('btn-time').className = 'ctrl-btn' + (m === 'time' ? ' active' : '');
+  render();
+}
+
+function render() {
+  const d = data[session][modal];
+  document.getElementById('packs-note').innerHTML = d.note;
+  const c = document.getElementById('cards-container');
+  c.innerHTML = '';
+  d.packages.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'pack-card' + (p.featured ? ' featured' : '');
+    const feats = p.features.map((f, fi) =>
+      `<li class="${fi < 2 ? 'highlight' : ''}">${f}</li>`
+    ).join('');
+    const reservePct = Math.round(p.price * 0.30);
+    card.innerHTML = `
+      <p class="card-num">${p.num} · Paquete</p>
+      <h3 class="card-deity">${p.deity}</h3>
+      <p class="card-tagline">${p.tagline}</p>
+      <div class="card-price-wrap">
+        <div class="card-price"><sup>€</sup>${p.price}</div>
+        <p class="card-price-sub">por sesión · IVA no incluido</p>
+      </div>
+      <div class="card-rule"></div>
+      <ul class="card-features">${feats}</ul>
+      <div class="card-reserve">Reserva · €${reservePct} de señal (30%)</div>
+    `;
+    c.appendChild(card);
+  });
+}
+
+render();
+</script>
+</body>
+</html>
